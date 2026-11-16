@@ -2,7 +2,7 @@
 // Puedes editar titulos, descripciones y categorias aqui: se conservan al volver a ejecutar el script.
 // Si borras un archivo de la carpeta contenido, desaparece de la web la proxima vez que ejecutes el script.
 window.GALERIA = {
-    "generado":  "2026-11-16 16:10",
+    "generado":  "2026-11-16 19:12",
     "showreel":  "",
     "miniaturas":  [
                        {
@@ -788,7 +788,7 @@ window.GALERIA = {
                         "id":  "@SatsieCrypto",
                         "url":  "https://www.youtube.com/@SatsieCrypto",
                         "nombre":  "Satsie Crypto",
-                        "suscriptores":  "2,4 mil suscriptores",
+                        "suscriptores":  "2,42 mil suscriptores",
                         "avatar":  "contenido/_web/canales/_SatsieCrypto.jpg"
                     },
                     {
@@ -825,6 +825,13 @@ window.GALERIA = {
                         "nombre":  "Jaw",
                         "suscriptores":  "7,21 mil suscriptores",
                         "avatar":  "contenido/_web/canales/_GoldJaws_.jpg"
+                    },
+                    {
+                        "id":  "@PastanagaCrypto",
+                        "url":  "https://www.youtube.com/@PastanagaCrypto",
+                        "nombre":  "Pastanaga Crypto",
+                        "suscriptores":  "7,18 mil suscriptores",
+                        "avatar":  "contenido/_web/canales/_PastanagaCrypto.jpg"
                     }
                 ]
 };
