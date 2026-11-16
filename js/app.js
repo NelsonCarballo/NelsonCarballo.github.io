@@ -171,18 +171,142 @@
       frame.insertAdjacentHTML('afterend', devHint('Para el showreel, pon un video en <code>contenido/showreel/</code> y ejecuta <code>ACTUALIZAR-GALERIA.bat</code>, o pega un link de YouTube en <code>contenido/perfil.js</code> → <code>showreel</code>.'));
     }
 
+    // Carga la API de YouTube una sola vez
+    let apiP = null;
+    function ytApi() {
+      if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+      if (apiP) return apiP;
+      apiP = new Promise((res, rej) => {
+        const prev = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = () => { if (prev) prev(); res(window.YT); };
+        const s = document.createElement('script');
+        s.src = 'https://www.youtube.com/iframe_api';
+        s.onerror = () => { apiP = null; rej(); };
+        document.head.appendChild(s);
+      });
+      return apiP;
+    }
+    const fmt = t => `${Math.floor(t / 60)}:${pad2(Math.floor(t) % 60)}`;
+    const tc = t => `${pad2(Math.floor(t / 3600))}:${pad2(Math.floor(t / 60) % 60)}:${pad2(Math.floor(t) % 60)}:${pad2(Math.floor((t % 1) * 24))}`;
+
+    // Reproductor de YouTube SIN los controles de YouTube: una capa transparente tapa el video,
+    // así no se puede hacer clic en el título/logo ni usar el menú del botón derecho para copiar el link.
     function youtube() {
-      nameEl.textContent = 'SHOWREEL // YOUTUBE';
+      nameEl.textContent = 'SHOWREEL_MASTER.MP4';
+      tcEl.textContent = '00:00:00:00';
+      frame.classList.remove('is-playing');
+      status.textContent = 'LISTO';
       screen.innerHTML = `<img alt="Showreel de ${esc(PERFIL.nombre || 'Carballo Nelson')}" src="https://i.ytimg.com/vi/${yt}/maxresdefault.jpg">${reticle}${bigplay}`;
       const img = $('img', screen);
       const fallback = () => { if (!img.dataset.fb) { img.dataset.fb = 1; img.src = `https://i.ytimg.com/vi/${yt}/hqdefault.jpg`; } };
       img.addEventListener('error', fallback);
       img.addEventListener('load', () => { if (img.naturalWidth && img.naturalWidth <= 120) fallback(); });
-      $('.bigplay', screen).addEventListener('click', () => {
-        screen.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&rel=0&playsinline=1" title="Showreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
-        frame.classList.add('is-playing');
-        status.textContent = 'REPRODUCIENDO';
+      $('.bigplay', screen).addEventListener('click', start);
+    }
+
+    function start() {
+      const canFs = !!(screen.requestFullscreen || screen.webkitRequestFullscreen);
+      screen.innerHTML = `
+        <div class="yt-host"><div id="yt-reel"></div></div>
+        <div class="yt-shield" aria-hidden="true"><span class="yt-shield__ico"><span class="msym msym--fill">play_arrow</span></span></div>
+        <div class="yt-ctrl mono-sm">
+          <button type="button" class="yt-btn" data-a="play" aria-label="Pausar"><span class="msym msym--fill">pause</span></button>
+          <span class="yt-time">0:00</span>
+          <input class="yt-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Posición del video">
+          <span class="yt-time yt-dur">0:00</span>
+          <button type="button" class="yt-btn" data-a="mute" aria-label="Silenciar"><span class="msym">volume_up</span></button>
+          ${canFs ? `<button type="button" class="yt-btn" data-a="fs" aria-label="Pantalla completa"><span class="msym">fullscreen</span></button>` : ''}
+        </div>`;
+      screen.classList.add('is-yt');
+      status.textContent = 'CARGANDO…';
+      const shield = $('.yt-shield', screen), seek = $('.yt-seek', screen);
+      const tNow = $('.yt-time', screen), tDur = $('.yt-dur', screen);
+      const bPlay = $('[data-a="play"]', screen), bMute = $('[data-a="mute"]', screen), bFs = $('[data-a="fs"]', screen);
+      let p = null, timer = 0, dragging = false, tried = false;
+
+      // nada de menú contextual sobre el reproductor
+      screen.addEventListener('contextmenu', e => e.preventDefault());
+
+      const setPlayIcon = playing => {
+        $('.msym', bPlay).textContent = playing ? 'pause' : 'play_arrow';
+        bPlay.setAttribute('aria-label', playing ? 'Pausar' : 'Reproducir');
+        screen.classList.toggle('is-paused', !playing);
+      };
+      const setMuteIcon = () => {
+        const m = p && p.isMuted && p.isMuted();
+        $('.msym', bMute).textContent = m ? 'volume_off' : 'volume_up';
+        bMute.setAttribute('aria-label', m ? 'Activar sonido' : 'Silenciar');
+        bMute.classList.toggle('is-alert', !!m);
+      };
+      const tick = () => {
+        if (!p || !p.getCurrentTime) return;
+        const t = p.getCurrentTime() || 0, d = p.getDuration() || 0;
+        tcEl.textContent = tc(t);
+        tNow.textContent = fmt(t);
+        if (d) tDur.textContent = fmt(d);
+        if (!dragging && d) seek.value = Math.round(t / d * 1000);
+        seek.style.setProperty('--p', (seek.value / 10) + '%');
+        setMuteIcon();
+      };
+      const toggle = () => {
+        if (!p || !p.getPlayerState) return;
+        const s = p.getPlayerState();
+        if (s === 1 || s === 3) p.pauseVideo(); else p.playVideo();
+      };
+      const finish = () => {
+        clearInterval(timer);
+        if (document.fullscreenElement === screen) document.exitFullscreen().catch(() => {});
+        try { p && p.destroy(); } catch (e) {}
+        screen.classList.remove('is-yt', 'is-paused');
+        youtube();
+      };
+
+      shield.addEventListener('click', toggle);
+      bPlay.addEventListener('click', toggle);
+      bMute.addEventListener('click', () => { if (!p) return; p.isMuted() ? p.unMute() : p.mute(); setTimeout(setMuteIcon, 60); });
+      if (bFs) bFs.addEventListener('click', () => {
+        const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+        if (fsEl) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        else (screen.requestFullscreen || screen.webkitRequestFullscreen).call(screen);
       });
+      document.addEventListener('fullscreenchange', () => {
+        if (bFs) $('.msym', bFs).textContent = document.fullscreenElement === screen ? 'fullscreen_exit' : 'fullscreen';
+      });
+      seek.addEventListener('input', () => { dragging = true; seek.style.setProperty('--p', (seek.value / 10) + '%'); });
+      seek.addEventListener('change', () => {
+        dragging = false;
+        if (p && p.getDuration) p.seekTo(seek.value / 1000 * p.getDuration(), true);
+      });
+
+      ytApi().then(YT => {
+        p = new YT.Player('yt-reel', {
+          videoId: yt,
+          host: 'https://www.youtube-nocookie.com',
+          playerVars: { autoplay: 1, controls: 0, disablekb: 1, fs: 0, rel: 0, playsinline: 1, iv_load_policy: 3, modestbranding: 1, cc_load_policy: 0 },
+          events: {
+            onReady: e => {
+              const f = e.target.getIframe();
+              f.setAttribute('tabindex', '-1');
+              f.setAttribute('title', 'Showreel');
+              e.target.playVideo();
+              timer = setInterval(tick, 200);
+              // algunos celulares no dejan arrancar con sonido: arranca en silencio y avisa en el botón
+              setTimeout(() => {
+                const s = e.target.getPlayerState();
+                if (!tried && s !== 1 && s !== 3) { tried = true; e.target.mute(); e.target.playVideo(); setMuteIcon(); }
+              }, 1500);
+            },
+            onStateChange: e => {
+              const s = e.data;
+              if (s === 1) { setPlayIcon(true); frame.classList.add('is-playing'); status.textContent = 'REPRODUCIENDO'; }
+              else if (s === 2) { setPlayIcon(false); frame.classList.remove('is-playing'); status.textContent = 'PAUSA'; }
+              else if (s === 3) status.textContent = 'CARGANDO…';
+              else if (s === 0) finish();
+            },
+            onError: () => { status.textContent = 'NO DISPONIBLE'; }
+          }
+        });
+      }).catch(() => { status.textContent = 'SIN CONEXIÓN'; });
     }
 
     function file(path) {

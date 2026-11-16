@@ -468,6 +468,42 @@ h1, h2, h3, h4, p { margin: 0; }
 .bigplay:hover span { transform: scale(1.1); }
 .bigplay .msym { font-size: 36px; }
 
+/* showreel de YouTube con controles propios */
+.yt-host { position: absolute; inset: 0; pointer-events: none; }
+.yt-host iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.yt-shield {
+  position: absolute; inset: 0; z-index: 2; cursor: pointer; display: grid; place-items: center;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}
+.yt-shield__ico {
+  width: clamp(56px, 7vw, 76px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(220, 38, 38, .92); color: #fff; box-shadow: var(--glow-strong);
+  opacity: 0; transform: scale(.85); transition: opacity .2s, transform .2s;
+}
+.yt-shield__ico .msym { font-size: 36px; }
+.player__screen.is-paused .yt-shield { background: rgba(0, 0, 0, .35); }
+.player__screen.is-paused .yt-shield__ico { opacity: 1; transform: none; }
+.yt-ctrl {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; align-items: center; gap: 10px;
+  padding: 26px 12px 10px; color: #fff; background: linear-gradient(transparent, rgba(0, 0, 0, .78));
+  opacity: 0; transition: opacity .25s;
+}
+.player__screen:hover .yt-ctrl, .player__screen:focus-within .yt-ctrl, .player__screen.is-paused .yt-ctrl { opacity: 1; }
+@media (hover: none) { .yt-ctrl { opacity: 1; } }
+.yt-btn { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--r); color: #fff; flex: none; }
+.yt-btn:hover { background: rgba(255, 255, 255, .14); }
+.yt-btn .msym { font-size: 24px; }
+.yt-btn.is-alert { color: #fff; background: var(--crimson); animation: wavePulse 1.2s ease-in-out infinite; }
+.yt-time { flex: none; font-variant-numeric: tabular-nums; min-width: 34px; text-align: center; }
+.yt-seek {
+  flex: 1; min-width: 40px; height: 4px; appearance: none; -webkit-appearance: none; cursor: pointer; border-radius: 2px;
+  background: linear-gradient(90deg, var(--crimson) var(--p, 0%), rgba(255, 255, 255, .28) var(--p, 0%));
+}
+.yt-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px rgba(220, 38, 38, .6); }
+.yt-seek::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: #fff; }
+.player__screen:fullscreen { max-width: none !important; aspect-ratio: auto !important; width: 100%; height: 100%; }
+@media (max-width: 480px) { .yt-dur { display: none; } .yt-ctrl { gap: 6px; padding: 22px 8px 8px; } }
+
 /* pantalla vacía: barras SMPTE */
 .nosignal { position: absolute; inset: 0; display: grid; grid-template-rows: 67% 8% 25%; }
 .nosignal__bars, .nosignal__mid, .nosignal__low { display: grid; }
