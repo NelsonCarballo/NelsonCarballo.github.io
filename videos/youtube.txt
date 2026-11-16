@@ -1,0 +1,37 @@
+# =====================================================================
+#  VIDEOS DE YOUTUBE
+#  Pega un link por linea (SIN # al principio). Opcional: | Titulo | Categoria
+#  Los links de /shorts/ se muestran automaticamente en formato vertical.
+#  Las lineas que empiezan con # se ignoran.
+#  Despues de editar, ejecuta ACTUALIZAR-GALERIA.bat
+#
+#  Ejemplo:
+#  https://youtu.be/XXXXXXXXXXX | Titulo del video | Categoria
+# =====================================================================
+
+# --- Largo formato ---
+https://youtu.be/x34ZkAlQqXA?si=xmIx4NJlJhotwdej | Noticias de finanzas | Cripto-Finanzas
+https://youtu.be/sOeSXZLUlec?si=DHpZDNuYRv0R0Kg5 | Tutorial | Cripto-Finanzas
+https://youtu.be/8QPft4U8sQ8?si=aMkiXwtgyy44jfKa | Criptomonedas | Análisis de mercado
+
+# --- Shorts (canal Cyber Emprendedor, del mas nuevo al mas viejo) ---
+https://www.youtube.com/shorts/WDPeJURYxTE
+https://www.youtube.com/shorts/Dnx9MB25iX0
+https://www.youtube.com/shorts/ZMyxstz3bdM
+https://www.youtube.com/shorts/vesDpAClx3c
+https://www.youtube.com/shorts/Nx4761l9ai8
+https://www.youtube.com/shorts/N4_H5L-kEyQ
+https://www.youtube.com/shorts/AiStx79ud6o
+https://www.youtube.com/shorts/adnkExl5yNE
+https://www.youtube.com/shorts/FESrorUMe8I
+https://www.youtube.com/shorts/AcZu2H5FjKc
+https://www.youtube.com/shorts/cCvFQ27uK0U
+https://www.youtube.com/shorts/Us87HowE1vo
+https://www.youtube.com/shorts/ioekkwg_tDU
+https://www.youtube.com/shorts/6vThUe8QNgA
+https://www.youtube.com/shorts/JEc9Duc6vHg
+https://www.youtube.com/shorts/-kGwgcply_0
+https://www.youtube.com/shorts/XUJ6vr_nEEg
+https://www.youtube.com/shorts/tvnCZrtDsTY
+https://www.youtube.com/shorts/dkFLb_0hvos
+https://www.youtube.com/shorts/brJfhj4HFRI
