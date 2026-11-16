@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carballo Nelson — Editor de Video &amp; Miniaturas para YouTube</title>
+  <meta name="description" content="Portfolio de Carballo Nelson: miniaturas de alto CTR y edición de video para YouTubers y creadores de contenido. Largo formato, Shorts y Reels.">
+  <meta name="theme-color" content="#050507">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Carballo Nelson — Editor de Video & Miniaturas">
+  <meta property="og:description" content="Miniaturas que frenan el scroll y edición que retiene a la audiencia.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23050507'/%3E%3Crect x='3' y='3' width='10' height='10' fill='%23dc2626'/%3E%3Crect x='6' y='5' width='2' height='6' fill='%23fff'/%3E%3Crect x='8' y='6' width='2' height='4' fill='%23fff'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,600;0,700;0,800;1,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <!-- Tu contenido (se edita en la carpeta /contenido) -->
+  <script src="contenido/perfil.js"></script>
+  <script src="contenido/galeria.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<!-- ======================================================================= -->
+<!-- HEADER                                                                  -->
+<!-- ======================================================================= -->
+<header class="topbar" id="topbar">
+  <div class="topbar__inner">
+    <div style="display:flex;align-items:center;gap:14px;min-width:0">
+      <a class="brand" href="#inicio" aria-label="Carballo Nelson — inicio">
+        <span class="brand__dot"></span>
+        <span class="brand__name">CARBALLO<b>//</b>NELSON</span>
+      </a>
+      <span class="topbar__status mono-sm"><span class="c-crimson" data-perfil="estado">EDITOR//DISPONIBLE</span><span>YT • SHORTS • MINIS</span></span>
+    </div>
+
+    <nav class="nav" id="nav" aria-label="Secciones">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#canales">Canales</a>
+      <a href="#showreel">Showreel</a>
+      <a href="#miniaturas">Miniaturas</a>
+      <a href="#antes-despues">Antes &amp; Después</a>
+      <a href="#videos">Videos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="topbar__actions">
+      <button class="icon-btn" id="toggle-actor" type="button" aria-pressed="true" aria-label="Mostrar u ocultar al personaje" title="Mostrar / ocultar al personaje">
+        <span class="msym">sports_esports</span>
+      </button>
+      <a class="btn btn--primary btn--sm topbar__cta" href="#contacto"><span class="ping-dot ping-dot--white"></span>¡HABLEMOS!</a>
+      <button class="icon-btn nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" title="Menú">
+        <span class="msym">menu</span>
+      </button>
+    </div>
+  </div>
+  <div class="topbar__progress"><span id="scroll-progress"></span></div>
+</header>
+
+<main id="main">
+
+  <!-- ===================================================================== -->
+  <!-- 01 HERO                                                               -->
+  <!-- ===================================================================== -->
+  <section class="section hero" id="inicio">
+    <div class="wrap" style="flex:1;display:flex;flex-direction:column">
+      <div class="metabar mono-sm">
+        <div class="metabar__group">
+          <span class="c-primary" style="display:inline-flex;align-items:center;gap:8px"><span class="ping-dot ping-dot--red"></span>EDITOR DE VIDEO &amp; DISEÑADOR DE MINIATURAS</span>
+          <span class="sep">|</span>
+          <span>TRABAJO 100% REMOTO</span>
+        </div>
+        <div class="metabar__group" style="color:var(--on-var)">
+          <span>FORMATOS: 16:9 • 9:16</span>
+          <span id="meta-tools">PREMIERE • AE • PHOTOSHOP</span>
+        </div>
+      </div>
+
+      <div class="hero__grid">
+        <div class="hero__copy reveal">
+          <div class="chip mono-sm">
+            <span class="c-crimson" style="font-weight:800">PORTFOLIO <span data-year>2026</span></span>
+            <span class="muted">/</span>
+            <span>YOUTUBE • SHORTS • MINIATURAS</span>
+          </div>
+          <h1 class="h1 hero__title">
+            <span>CLIC.</span> <span>CORTE.</span> <span class="grad">IMPACTO.</span>
+          </h1>
+          <p class="lead">
+            Diseño miniaturas que hacen que la gente haga clic y edito videos que hacen que se quede hasta el final.
+            Trabajo con YouTubers y creadores que quieren crecer en serio.
+          </p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="#miniaturas"><span class="msym">grid_view</span>Ver miniaturas</a>
+            <a class="btn btn--ghost" href="#showreel"><span class="msym">play_circle</span>Ver showreel</a>
+          </div>
+          <div class="stats" id="hero-stats"></div>
+        </div>
+
+        <!-- Sala de edición pixel: el personaje empieza aquí, tecleando -->
+        <div class="reveal">
+          <div class="stage" id="stage" aria-hidden="true">
+            <div class="stage__hud mono-sm"><span>CAM 01 // SALA DE EDICIÓN</span><span class="rec">● REC</span></div>
+            <i class="stage__corner stage__corner--tl"></i><i class="stage__corner stage__corner--tr"></i>
+            <i class="stage__corner stage__corner--bl"></i><i class="stage__corner stage__corner--br"></i>
+
+            <div class="stage__monitor">
+              <div class="mon__viewer">
+                <span class="mon__badge">REC</span>
+                <span class="mon__face"></span>
+                <span class="mon__word">¡CLIC!</span>
+              </div>
+              <div class="mon__timeline">
+                <div class="mon__track" data-t="V2"><i class="clip-a" style="left:8%;width:18%"></i><i class="clip-b" style="left:52%;width:14%"></i></div>
+                <div class="mon__track" data-t="V1"><i class="clip-c" style="left:0;width:34%"></i><i class="clip-a" style="left:35%;width:28%"></i><i class="clip-c" style="left:64%;width:36%"></i></div>
+                <div class="mon__track" data-t="A1"><i class="clip-d" style="left:0;width:63%"></i><i class="clip-d" style="left:65%;width:35%"></i></div>
+                <div class="mon__track" data-t="A2"><i class="clip-d" style="left:12%;width:40%"></i><i class="clip-b" style="left:70%;width:10%"></i></div>
+                <span class="mon__playhead"></span>
+              </div>
+            </div>
+            <span class="stage__note">CTR ↑↑</span>
+
+            <div class="stage__desk">
+              <div class="desk__top">
+                <span class="stage-seat" id="stage-seat"></span>
+                <span class="desk__mug"><i></i></span>
+                <span class="desk__drives"><i></i><i></i></span>
+              </div>
+              <div class="desk__front"></div>
+            </div>
+            <span class="stage__caption mono-sm">NELSON.EXE // RENDER 87%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 02 SOBRE MÍ + SERVICIOS                                               -->
+  <!-- ===================================================================== -->
+  <section class="section" id="sobre-mi">
+    <div class="wrap">
+      <div class="about">
+        <div class="pcard card glow reveal" id="pcard">
+          <div class="pcard__top mono-sm"><span><b>P1</b> // JUGADOR SELECCIONADO</span><span>LVL <span id="pc-lvl">99</span></span></div>
+          <div class="pcard__stage">
+            <span class="pcard__arrow pcard__arrow--l" aria-hidden="true">◄</span>
+            <span class="pcard__arrow pcard__arrow--r" aria-hidden="true">►</span>
+            <canvas id="pc-sprite" width="32" height="60" aria-label="Retrato pixel art de Carballo Nelson" role="img"></canvas>
+          </div>
+          <div class="pcard__name" data-perfil="nombre-mayus">CARBALLO NELSON</div>
+          <div class="pcard__class mono-sm">CLASE: EDITOR &amp; DISEÑADOR DE MINIATURAS</div>
+          <div class="pstats mono-sm" id="pc-stats"></div>
+        </div>
+
+        <div class="about__copy reveal">
+          <div class="eyebrow"><span class="eyebrow__dot"></span>02 // SOBRE MÍ</div>
+          <div class="me">
+            <span class="me__photo"><img src="img/nelson-carballo.jpg" alt="Foto de Carballo Nelson" width="96" height="96" decoding="async"></span>
+            <div>
+              <h2 class="h2">El editor detrás de los clics</h2>
+              <div class="me__tag mono-sm"><span class="ping-dot ping-dot--green"></span><span data-perfil="nombre-mayus">CARBALLO NELSON</span> // EDITOR &amp; DISEÑADOR</div>
+            </div>
+          </div>
+          <div class="lead" id="about-bio"></div>
+          <div class="quals" id="quals"></div>
+          <blockquote class="promise" id="promise"></blockquote>
+          <div class="tools mono-md" id="tools"></div>
+        </div>
+      </div>
+
+      <div class="services" id="services"></div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 03 CANALES (carrusel)                                                 -->
+  <!-- ===================================================================== -->
+  <section class="section" id="canales">
+    <div class="wrap">
+      <div class="sec-head sec-head--split reveal">
+        <div>
+          <div class="eyebrow"><span class="eyebrow__dot eyebrow__dot--ping"></span>03 // CANALES</div>
+          <h2 class="h2">Creadores que confían en mi trabajo</h2>
+          <p class="lead">Algunos creadores con los que trabajo o trabajé en el pasado.</p>
+        </div>
+        <div class="car-nav" aria-label="Mover carrusel">
+          <button type="button" class="icon-btn car-btn" id="car-prev" aria-label="Anterior"><span class="msym">chevron_left</span></button>
+          <button type="button" class="icon-btn car-btn" id="car-next" aria-label="Siguiente"><span class="msym">chevron_right</span></button>
+        </div>
+      </div>
+      <div class="carousel" id="carousel">
+        <div class="car-track" id="car-track"></div>
+      </div>
+      <div class="car-dots mono-sm" id="car-info"></div>
+      <div id="car-hint"></div>
+    </div>
+  </section>
+  <!-- ===================================================================== -->
+  <!-- 04 SHOWREEL                                                           -->
+  <!-- ===================================================================== -->
+  <section class="section" id="showreel">
+    <div class="wrap">
+      <div class="sec-head sec-head--split reveal">
+        <div>
+          <div class="eyebrow"><span class="eyebrow__dot"></span>04 // SHOWREEL</div>
+          <h2 class="h2">Fragmentos de Trabajos</h2>
+          <p class="lead">Ritmo, sonido, color y retención. Dale play y mira cómo trabajo.</p>
+        </div>
+      </div>
+
+      <div class="player card glow reveal" id="reel-frame" data-touch>
+        <div class="player__bar mono-sm">
+          <div class="player__file"><span class="dots"><i></i><i></i><i></i></span><b id="reel-name">SHOWREEL_MASTER.MP4</b></div>
+          <div class="ratio" role="group" aria-label="Relación de aspecto">
+            <button type="button" class="is-on" data-ratio="16/9">16:9</button>
+            <button type="button" data-ratio="2.39/1">2.39:1 SCOPE</button>
+            <button type="button" data-ratio="9/16">9:16 VERT</button>
+          </div>
+        </div>
+        <div class="player__screen" id="reel-screen"></div>
+        <div class="player__foot mono-sm">
+          <div class="player__left">
+            <span class="c-primary" id="reel-tc">00:00:00:00</span>
+            <span class="pill"><span class="msym">hd</span><span id="reel-status">LISTO</span></span>
+          </div>
+          <div class="meter" aria-hidden="true">
+            <span class="muted" style="font-size:10px">CH 1/2</span>
+            <span class="meter__bars">
+              <i style="animation-delay:.1s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.5s"></i><i style="animation-delay:.2s"></i>
+              <i style="animation-delay:.6s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.45s"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 04 MINIATURAS                                                         -->
+  <!-- ===================================================================== -->
+  <section class="section" id="miniaturas">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="reveal">
+          <div class="eyebrow"><span class="eyebrow__dot eyebrow__dot--ping"></span>05 // MINIATURAS DE YOUTUBE</div>
+          <h2 class="h2">Miniaturas que frenan el scroll</h2>
+          <p class="lead">Diseños pensados para captar la mirada en el feed en menos de un segundo: contraste, emoción y un texto que se lee incluso en el móvil.</p>
+        </div>
+      </div>
+      <div class="filters" id="thumb-filters" role="toolbar" aria-label="Filtrar miniaturas"></div>
+
+      <div class="toolbar mono-sm" id="thumb-toolbar">
+        <span><b id="thumb-count">0</b> ARCHIVOS EN LA LÍNEA DE TIEMPO</span>
+        <span>CLICK PARA AMPLIAR // ← → PARA NAVEGAR</span>
+      </div>
+      <div class="thumb-grid" id="thumb-grid"></div>
+      <div class="more"><button class="btn btn--ghost" id="thumb-more" type="button" hidden><span class="msym">expand_more</span>Ver más miniaturas</button></div>
+      <div id="thumb-hint"></div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 05 ANTES & DESPUÉS                                                    -->
+  <!-- ===================================================================== -->
+  <section class="section" id="antes-despues">
+    <div class="wrap ba">
+      <div class="reveal">
+        <div class="eyebrow"><span class="eyebrow__dot"></span>06 // ANTES &amp; DESPUÉS</div>
+        <h2 class="h2">De foto plana a miniatura que rompe el feed</h2>
+        <p class="lead" style="margin-top:14px">Transformo capturas y fotos sin vida en miniaturas que la gente quiere tocar: recorte, iluminación, color y texto con jerarquía.</p>
+        <div class="features">
+          <div class="feature"><span class="msym">auto_fix_high</span><div><strong>Recorte e iluminación</strong><span>Aíslo al creador, agrego luz de contorno y separo del fondo.</span></div></div>
+          <div class="feature"><span class="msym">contrast</span><div><strong>Contraste y color de impacto</strong><span>Tonos pensados para destacar en pantallas móviles y en el modo oscuro de YouTube.</span></div></div>
+          <div class="feature"><span class="msym">ads_click</span><div><strong>Jerarquía y texto</strong><span>Pocas palabras, grandes y legibles incluso en la vista previa más pequeña.</span></div></div>
+        </div>
+        <div class="pairs" id="ba-pairs" role="tablist" aria-label="Elegir comparación"></div>
+      </div>
+
+      <div class="ba__panel card glow reveal">
+        <div class="ba__labels mono-sm">
+          <span class="muted"><i></i>MATERIAL ORIGINAL</span>
+          <span class="c-primary"><i></i>MINIATURA FINAL</span>
+        </div>
+        <div class="compare" id="compare">
+          <div class="compare__layer compare__after" id="ba-after"></div>
+          <div class="compare__layer compare__before" id="ba-before"></div>
+          <input type="range" id="ba-range" min="0" max="100" value="50" step="0.5" aria-label="Deslizar para comparar antes y después">
+          <div class="compare__handle"><span><span class="msym">drag_indicator</span></span></div>
+        </div>
+        <div class="ba__foot mono-sm">
+          <span>◄ DESLIZA PARA COMPARAR ►</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 06 VIDEOS                                                             -->
+  <!-- ===================================================================== -->
+  <section class="section" id="videos">
+    <div class="wrap">
+      <div class="sec-head sec-head--split reveal">
+        <div>
+          <div class="eyebrow"><span class="eyebrow__dot"></span>07 // EDICIÓN DE VIDEO</div>
+          <h2 class="h2">Historias que retienen a la audiencia</h2>
+          <p class="lead">Ritmo dinámico, ganchos en los primeros segundos, diseño sonoro y subtítulos que acompañan. Largo formato y vertical.</p>
+        </div>
+      </div>
+
+      <div class="subhead mono-sm"><b>▶</b> LARGO FORMATO</div>
+      <div class="video-grid" id="video-grid"></div>
+
+      <div class="shorts-wrap">
+        <div class="subhead mono-sm"><b>▮</b> SHORTS • REELS • TIKTOK</div>
+        <div class="shorts-row" id="shorts-row"></div>
+      </div>
+      <div id="video-hint"></div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 07 PROCESO                                                            -->
+  <!-- ===================================================================== -->
+  <section class="section" id="proceso">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow"><span class="eyebrow__dot"></span>08 // PROCESO</div>
+          <h2 class="h2">Proceso de trabajo</h2>
+          <p class="lead">Simple, rápido y sin vueltas. Tú creas, yo me encargo del resto.</p>
+        </div>
+      </div>
+      <div class="steps" id="steps">
+        <div class="step card" data-touch>
+          <div class="step__n mono-sm"><b>01</b><span>BRIEF</span></div>
+          <h3 class="h3">Me cuentas tu idea</h3>
+          <p>Tema del video, referencias que te gustan, tu público y la fecha de publicación.</p>
+          <div class="step__bar"><i></i></div>
+        </div>
+        <div class="step card" data-touch>
+          <div class="step__n mono-sm"><b>02</b><span>PRIMER CORTE</span></div>
+          <h3 class="h3">Boceto o primer corte <span class="step__opt">(Si es necesario)</span></h3>
+          <p>Te envío la primera versión de la miniatura o del video para que la revises.</p>
+          <div class="step__bar"><i></i></div>
+        </div>
+        <div class="step card" data-touch>
+          <div class="step__n mono-sm"><b>03</b><span>AJUSTES</span></div>
+          <h3 class="h3">Pulimos los detalles <span class="step__opt">(Si es necesario)</span></h3>
+          <p>Aplico tus cambios: ritmo, textos, colores, música. Hasta que quede como lo imaginaste.</p>
+          <div class="step__bar"><i></i></div>
+        </div>
+        <div class="step card" data-touch>
+          <div class="step__n mono-sm"><b>04</b><span>ENTREGA</span></div>
+          <h3 class="h3">Listo para publicar</h3>
+          <p>Archivos finales en la calidad y formatos que necesitas para YouTube, Shorts, Reels o TikTok.</p>
+          <div class="step__bar"><i></i></div>
+        </div>
+      </div>
+      <!-- carril por donde camina el personaje (solo escritorio) -->
+      <div class="steps-lane" id="steps-lane" aria-hidden="true">
+        <span class="mono-sm">01</span><span class="mono-sm">02</span><span class="mono-sm">03</span><span class="mono-sm">04</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 08 CONTACTO                                                           -->
+  <!-- ===================================================================== -->
+  <section class="section section--last" id="contacto">
+    <div class="wrap contact">
+      <div class="reveal">
+        <div class="eyebrow"><span class="eyebrow__dot"></span>09 // HABLEMOS DE TU PROYECTO</div>
+        <h2 class="h2">Llevemos tu canal al siguiente nivel</h2>
+        <p class="lead" style="margin-top:12px">¿Tienes un video listo para editar o necesitas miniaturas que multipliquen tus clics? Escríbeme y armamos una prueba o un presupuesto a tu medida.</p>
+        <div class="links" id="contact-links"></div>
+        <div class="guarantees mono-sm" id="guarantees"></div>
+      </div>
+
+      <div class="form-card card glow reveal" id="contact-card">
+        <h3 class="h3">Cuéntame sobre tu contenido</h3>
+        <p>Completa estos datos y te respondo con ideas para tu canal.</p>
+        <form class="form" id="contact-form" novalidate>
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <div class="form__row">
+            <div class="field">
+              <label class="mono-sm" for="f-name">TU NOMBRE O APODO *</label>
+              <input id="f-name" name="nombre" type="text" placeholder="Ej. Carlos o PixelGamer" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label class="mono-sm" for="f-channel">LINK A TU CANAL O RED SOCIAL *</label>
+              <input id="f-channel" name="canal" type="text" placeholder="youtube.com/@tucanal" required>
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field">
+              <label class="mono-sm" for="f-reply">TU CORREO O USUARIO DE DISCORD *</label>
+              <input id="f-reply" name="contacto" type="text" placeholder="correo@ejemplo.com" required>
+            </div>
+            <div class="field">
+              <label class="mono-sm" for="f-service">¿QUÉ SERVICIO NECESITAS?</label>
+              <select id="f-service" name="servicio">
+                <option>Miniaturas para YouTube</option>
+                <option>Edición de video (largo formato)</option>
+                <option>Edición de Shorts / Reels / TikTok</option>
+                <option>Pack completo (edición + miniatura + shorts)</option>
+                <option>Mano derecha creativa (ideas y creación de contenido)</option>
+                <option>Prueba para colaboración mensual</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label class="mono-sm" for="f-msg">MENSAJE O DETALLES DEL VIDEO</label>
+            <textarea id="f-msg" name="mensaje" rows="4" placeholder="Cuéntame la temática de tu canal, cada cuánto subes videos o comparte referencias que te gusten..."></textarea>
+          </div>
+          <button class="btn btn--primary btn--block" id="contact-submit" type="submit"><span class="ping-dot ping-dot--white"></span>ENVIAR MENSAJE Y EMPEZAR</button>
+          <div class="form__ok mono-sm" id="contact-ok" role="status" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ======================================================================= -->
+<!-- FOOTER                                                                  -->
+<!-- ======================================================================= -->
+<footer class="footer" id="site-footer">
+  <div class="wrap footer__inner">
+    <div>
+      <div class="footer__brand">CARBALLO<b>//</b>NELSON</div>
+      <small class="mono-sm">© <span data-year>2026</span> CARBALLO NELSON — EDICIÓN DE VIDEO &amp; MINIATURAS PARA YOUTUBE</small>
+    </div>
+    <nav class="mono-sm" aria-label="Pie de página">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#canales">Canales</a>
+      <a href="#showreel">Showreel</a>
+      <a href="#miniaturas">Miniaturas</a>
+      <a href="#antes-despues">Antes &amp; Después</a>
+      <a href="#videos">Videos</a>
+      <a href="#contacto" style="color:var(--on)">Hablemos</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ======================================================================= -->
+<!-- MODAL: MINIATURA EN GRANDE                                              -->
+<!-- ======================================================================= -->
+<div class="modal" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lb-title">
+  <div class="modal__box card">
+    <div class="modal__head">
+      <div><span class="mono-sm" id="lb-cat">CATEGORÍA</span><h4 id="lb-title">Miniatura</h4></div>
+      <button class="modal__close" type="button" data-close aria-label="Cerrar"><span class="msym">close</span></button>
+    </div>
+    <div class="modal__media">
+      <button class="lb-nav lb-nav--prev" type="button" id="lb-prev" aria-label="Anterior"><span class="msym">chevron_left</span></button>
+      <img id="lb-img" src="data:," alt="">
+      <button class="lb-nav lb-nav--next" type="button" id="lb-next" aria-label="Siguiente"><span class="msym">chevron_right</span></button>
+    </div>
+    <div class="modal__foot mono-sm">
+      <span id="lb-desc"></span>
+      <span class="pill" id="lb-count">01 / 01</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- MODAL: VIDEO                                                            -->
+<!-- ======================================================================= -->
+<div class="modal vmodal" id="vmodal" role="dialog" aria-modal="true" aria-labelledby="vm-title">
+  <div class="modal__box card">
+    <div class="modal__head">
+      <div><span class="mono-sm" id="vm-cat">VIDEO</span><h4 id="vm-title">Video</h4></div>
+      <button class="modal__close" type="button" data-close aria-label="Cerrar"><span class="msym">close</span></button>
+    </div>
+    <div class="modal__media" id="vm-media"></div>
+    <div class="modal__foot mono-sm">
+      <span id="vm-desc"></span>
+      <a class="pill" id="vm-link" href="#" target="_blank" rel="noopener" hidden><span class="msym">open_in_new</span>ABRIR EN YOUTUBE</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- PERSONAJE PIXEL (capa sobre la página)                                  -->
+<!-- ======================================================================= -->
+<div class="actor-layer" id="actor-layer" aria-hidden="true">
+  <div class="actor" id="actor">
+    <canvas width="40" height="124"></canvas>
+    <div class="actor__hit" title="¡Hola! Haz clic"></div>
+  </div>
+  <div class="actor-bubble" id="actor-bubble"><span class="ab__head"><i></i>NELSON.EXE</span><span class="ab__text"></span></div>
+</div>
+
+<script src="js/sprite.js" defer></script>
+<script src="js/app.js" defer></script>
+<script src="js/personaje.js" defer></script>
+</body>
+</html>
